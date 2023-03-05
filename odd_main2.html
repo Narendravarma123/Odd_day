@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>odd numbers</title>
+    <style>
+        body{
+            background-image: url("https://catholicschoolsfwdioc.org/master-calendar-top.jpg");
+            margin-right:50%;
+            margin-top:10%;
+            
+            background-repeat: none;
+            background-size: cover;
+        
+        }
+        .main
+        {
+            align-items: center;
+            justify-content: center;
+            display:flex;
+            gap:20px;   
+        }
+        button
+        {
+            
+            display:flex;
+            right:150px;
+            margin-top:8%;
+            margin-left:42%;
+            color:#5a605f;
+            background-color: #5a605f;
+            color:white;
+            padding-left:16px;
+            padding-right:16px;
+            font-weight: bolder;
+            font-size: medium;
+            
+            
+
+        }
+        h3{
+            color:white;
+            font-family:cursive;
+            font-weight: 300;
+            font-size: 20px;
+        }
+        #C
+        {
+            height:20px;
+        }
+        
+        
+    
+    </style>
+</head>
+<body>
+    <h1 style="font-family: 'Times New Roman', Times, serif;color:white;">
+        <center>
+        WANNA KNOW YOUR BIRTH--DAY 
+        </h1>
+        <CENTER>
+        <H3>
+            USE ME!!
+        </H3>
+        </CENTER>
+    </center>
+        
+    <div class="main">
+    <h3>select year:</h3>
+    <select id="c" name="year"></select>
+    <h3>select month:</h3>
+    <select id="b" name="month"></select>
+    <h3>select day:</h3>
+    <select id="a" name="day" onmouseover="fun2()">
+    </select> 
+    </div>
+
+    <script>
+    select = document.getElementById('b');
+for (var i = 1; i<=12; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select.appendChild(opt);
+}
+select = document.getElementById('c');
+for (var i = 1900; i<=2023; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select.appendChild(opt);
+}
+function fun2(){
+select=document.getElementById('a');
+while (select.options.length > 0) {
+        select.remove(0);
+    }
+var y=document.querySelector('#b');
+var x= y.value;
+var ye=document.querySelector('#c');
+var xe= ye.value;
+console.log(x);
+if(x==1 || x==3 || x==5 || x==7 || x==8 || x==10 || x==12)
+{
+for(var i=1;i<=31;i++){
+    var opt=document.createElement('option');
+    opt.value=i;
+    opt.innerHTML=i;
+    select.appendChild(opt);
+}
+}
+else if(x==4 || x==6 || x==9 || x==11)
+{
+    for(var i=1;i<=30;i++){
+    var opt=document.createElement('option');
+    opt.value=i;
+    opt.innerHTML=i;
+    select.appendChild(opt);
+} 
+}
+else
+{
+    for(var i=1;i<=28;i++){
+    var opt=document.createElement('option');
+    opt.value=i;
+    opt.innerHTML=i;
+    select.appendChild(opt);
+    }
+if(leap(xe))
+{
+    var opt=document.createElement('option');
+    opt.value=29;
+    opt.innerHTML=29;
+    select.appendChild(opt); 
+} 
+}
+}
+</script>
+
+    <button onclick="fun()"method="POST">show</button>
+    <center>
+        <b>
+    <input type="text" id="d" style="color:black;padding-left:70px;margin-top:30px;display:flex;align-items: center;font-family:'Times New Roman', Times, serif;font-weight:150PX;font-size: 20px;background-color: antiquewhite;"></b>
+    </center>
+</body>
+</html>
+<script>
+    function fun(){
+        let year=parseInt(document.getElementById("c").value);
+        let mon=parseInt(document.getElementById("b").value);
+        let day=parseInt(document.getElementById("a").value);
+    let years=[31,28,31,30,31,30,31,31,30,31,30,31];
+    let days=["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+    let k1=on(day,mon,year,years);
+    console.log(k1);
+    if(k1%7==5)
+    {
+        document.getElementById("d").value="DRY DAY GUY";   
+    }
+    else{
+
+    
+    document.getElementById("d").value="THE DAY IS "+days[k1%7];
+    }
+}
+function leap(year)
+    {
+        if (year%4==0)
+        {
+            if(year%400==0)
+            {
+                return 1;
+            }
+            else{
+                if(year%100==0)
+                {
+                    return 0;
+                }
+                return 1;
+            }
+        }
+        else{
+            return 0;
+        }
+
+    }
+function on(day,mon,year,years)
+{
+let k=year%400;
+let m=k%100;
+k=parseInt(k/100);
+let le=parseInt((m-1)/4);
+let n=m-1-le
+let sum=(le*2)+n+(k*5);
+let main=mons(mon,day,sum,year,years);
+return main;
+}
+function mons(mon,day,k1,year,years)
+    {
+    let s=0;
+        if(mon==1)
+        {
+             k1=k1+day;
+        }
+        else{
+            for(let i=0;i<mon-1;i++)
+            {
+                k1=k1+years[i];
+            }
+           if(leap(year)!=1 || mon<=2 && day<=28)
+           {
+            k1=k1;
+           }
+           else{
+            k1=k1+1;
+           }
+           k1=k1+day;
+        }
+        return k1;
+    }
+
+</script>
