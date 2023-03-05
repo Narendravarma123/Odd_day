@@ -1,0 +1,1 @@
+This is a simple site where you can check the day of your wished date of random  year and month.This includes javascript which calculates the exact day precisely which includes all the constraints(leap year and february day fluctuations)
